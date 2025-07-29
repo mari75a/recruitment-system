@@ -18,6 +18,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', fn() => view('dashboard.user'))->name('dashboard');
+Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
+Route::get('/vacancies/{id}', [VacancyController::class, 'show'])->name('vacancies.show');
 
     Route::get('/dashboard/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
     Route::get('/dashboard/vacancy/{id}', [VacancyController::class, 'show'])->name('vacancies.show');

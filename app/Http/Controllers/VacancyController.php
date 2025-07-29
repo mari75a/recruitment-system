@@ -8,14 +8,14 @@ use App\Models\Vacancy;
 class VacancyController extends Controller
 {
     public function index()
-    {
-        $vacancies = Vacancy::latest()->get();
-        return view('dashboard.vacancies', compact('vacancies'));
-    }
+{
+    $vacancies = Vacancy::latest()->get();
+    return view('dashboard.vacancies', compact('vacancies'));
+}
 
     public function show($id)
-    {
-        $vacancy = Vacancy::findOrFail($id);
-        return view('dashboard.vacancy-show', compact('vacancy'));
-    }
+{
+    $vacancy = Vacancy::findOrFail($id);
+    return view('dashboard.vacancy-show', compact('vacancy'));
+}
 }
