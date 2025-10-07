@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -16,7 +17,18 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 
 // Protected routes
 Route::middleware(['auth'])->group(function () {
+Route::get('/my-applications', [ApplicationController::class, 'index'])
+    ->middleware('auth')
+    ->name('applications.index');
+ Route::get('/applications/{id}', [ApplicationController::class, 'show'])->name('applications.show');
+  
 
+// Vacancies
+Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
+
+// Profile
+// Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+// Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/dashboard', fn() => view('dashboard.user'))->name('dashboard');
 Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
 Route::get('/vacancies/{id}', [VacancyController::class, 'show'])->name('vacancies.show');

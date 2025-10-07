@@ -28,7 +28,7 @@
         <a href="#" class="flex items-center gap-3 text-white hover:text-orange-300 transition">
           <i class="fas fa-home"></i> Dashboard
         </a>
-        <a href="#" class="flex items-center gap-3 text-white hover:text-orange-300 transition">
+        <a href="{{ route('applications.index') }}" class="flex items-center gap-3 text-white hover:text-orange-300 transition">
           <i class="fas fa-briefcase"></i> My Applications
         </a>
         <a href="#" class="flex items-center gap-3 text-white hover:text-orange-300 transition">
