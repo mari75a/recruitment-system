@@ -11,12 +11,16 @@ class Job extends Model
 
     protected $fillable = [
         'title',
-        'company',
-        'description',
-        'location',
+        'department_id',
+        'requirements',
+        'deadline',
     ];
 
-    // Relationship: a job can have many applications
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
     public function applications()
     {
         return $this->hasMany(Application::class);

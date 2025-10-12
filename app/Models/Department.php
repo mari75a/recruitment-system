@@ -11,6 +11,7 @@ class Department extends Model
 
     protected $fillable = ['name'];
 
+    // A department has many jobs
     public function jobs()
     {
         return $this->hasMany(Job::class);
