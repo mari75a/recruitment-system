@@ -28,7 +28,7 @@ class ApplicationController extends Controller
     public function create($job_id)
     {
         $job = Job::findOrFail($job_id);
-        return view('apply', compact('job'));
+        return view('create', compact('job'));
     }
 
     /**

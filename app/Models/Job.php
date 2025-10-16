@@ -16,11 +16,18 @@ class Job extends Model
         'deadline',
     ];
 
+    // Make 'deadline' a Carbon instance
+    protected $dates = [
+        'deadline',
+    ];
+
+    // Relationship to department
     public function department()
     {
         return $this->belongsTo(Department::class);
     }
 
+    // Relationship to applications
     public function applications()
     {
         return $this->hasMany(Application::class);

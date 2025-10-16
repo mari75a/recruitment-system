@@ -32,7 +32,7 @@
         <a href="{{ route('applications.index') }}" class="flex items-center gap-3 text-white hover:text-orange-300 transition">
           <i class="fas fa-briefcase"></i> My Applications
         </a>
-        <a href="{{ url('/vacancies') }}" class="flex items-center gap-3 text-white hover:text-orange-300 transition">
+        <a href="{{ route('jobs.index') }}" class="flex items-center gap-3 text-white hover:text-orange-300 transition">
           <i class="fas fa-search"></i> Vacancies
         </a>
         <a href="{{ url('/profile/edit') }}" class="flex items-center gap-3 text-white hover:text-orange-300 transition">

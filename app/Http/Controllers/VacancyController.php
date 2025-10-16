@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
-use App\Models\Vacancy;
 
 class VacancyController extends Controller
 {
+    // Show all job vacancies
     public function index()
-{
-    $vacancies = Vacancy::latest()->get();
-    return view('dashboard.vacancies', compact('vacancies'));
-}
+    {
+        $vacancies = Job::with('department')->get();
+        return view('dashboard.vacancies', compact('vacancies'));
+    }
 
+    // Show a single job details page
     public function show($id)
-{
-    $vacancy = Vacancy::findOrFail($id);
-    return view('dashboard.vacancy-show', compact('vacancy'));
-}
+    {
+        $job = Job::with('department')->findOrFail($id);
+        return view('dashboard.show', compact('job'));
+    }
 }

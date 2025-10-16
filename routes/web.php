@@ -4,6 +4,7 @@ use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobsController;
 use App\Http\Controllers\VacancyController;
 
 // Public routes
@@ -19,6 +20,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
     Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store'])->name('applications.store');
 });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/vacancies', fn() => view('dashboard.vacancies'))->name('jobs.index');
+    
+    Route::get('/jobs/{id}', [JobsController::class, 'show'])->name('jobs.show');
+});
 // Protected routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-applications', [ApplicationController::class, 'index'])
@@ -28,17 +34,18 @@ Route::middleware(['auth'])->group(function () {
 
 
     // Vacancies
-    Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
+  
 
     // Profile
     // Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/dashboard', fn() => view('dashboard.user'))->name('dashboard');
-    Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
+    Route::get('/vacancies', [VacancyController::class, 'index'])->name('jobs.index');
     Route::get('/vacancies/{id}', [VacancyController::class, 'show'])->name('vacancies.show');
 
-    Route::get('/dashboard/vacancies', [VacancyController::class, 'index'])->name('vacancies.index');
-    Route::get('/dashboard/vacancy/{id}', [VacancyController::class, 'show'])->name('vacancies.show');
+    Route::get('/create/{job}', [ApplicationController::class, 'create'])->name('user.applications.create');
+Route::post('/store', [ApplicationController::class, 'store'])->name('user.applications.store');
+  
 
     Route::get('/logout', function () {
         Auth::logout();
