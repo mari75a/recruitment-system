@@ -34,32 +34,32 @@ class ApplicationController extends Controller
     /**
      * Store a new job application.
      */
-    public function store(Request $request, $job_id)
-    {
-        $request->validate([
-            'qualification' => 'required|string|max:255',
-            'experience' => 'required|string|max:255',
-            'skills' => 'required|string|max:255',
-            'document' => 'required|mimes:pdf,doc,docx|max:2048',
-        ]);
+    public function store(Request $request)
+{
+    $request->validate([
+        'qualification' => 'required|string|max:255',
+        'experience' => 'required|string|max:255',
+        'skills' => 'required|string|max:255',
+        'document' => 'required|mimes:pdf,doc,docx|max:2048',
+    ]);
 
-        $job = Job::findOrFail($job_id);
+    $job = Job::findOrFail($request->job_id);
 
-        // Upload resume/document
-        $path = $request->file('document')->store('documents', 'public');
+    $path = $request->file('document')->store('documents', 'public');
 
-        Application::create([
-            'user_id' => Auth::id(),
-            'job_id' => $job->id,
-            'qualification' => $request->qualification,
-            'experience' => $request->experience,
-            'skills' => $request->skills,
-            'document_path' => $path,
-            'submitted_at' => now(),
-        ]);
+    Application::create([
+        'user_id' => Auth::id(),
+        'job_id' => $job->id,
+        'qualification' => $request->qualification,
+        'experience' => $request->experience,
+        'skills' => $request->skills,
+        'document_path' => $path,
+        'submitted_at' => now(),
+    ]);
 
-        return redirect()->route('applications.index')->with('success', 'Application submitted successfully!');
-    }
+    return redirect()->route('applications.index')->with('success', 'Application submitted successfully!');
+}
+
 
     /**
      * Show details of a single application.
